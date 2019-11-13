@@ -2,13 +2,15 @@ import React from 'react'
 import Container from '@material-ui/core/Container'
 
 import Logo from './Logo'
-import Options from './Options'
+import Controls from './Controls'
 
-const Header = ({ setOptions }) => (
+const Header = ({ options, setOptions, save }) => (
   <Container maxWidth="lg">
     <Logo />
-    <Options 
-      setOptions
+    <Controls 
+      setOptions={setOptions}
+      options={options}
+      save={save}
     />
   </Container>
 )

@@ -1,3 +1,19 @@
+# codeshot
+
+App feito em ReactJS para tirar screenshots de trechos de códigos.
+
+Ferramentas utilizadas:
+
+- ReactJS
+- React Hooks
+- MaterialUI
+- React Monaco Editor
+- Monaco Editor
+- create-react-app
+- html2canvas
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
