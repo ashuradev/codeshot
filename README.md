@@ -1,6 +1,6 @@
 # codeshot
 
-App feito em ReactJS para tirar screenshots de trechos de códigos.
+App feito em ReactJS para tirar screenshots de trechos de códigos no Monaco Editor.
 
 Ferramentas utilizadas:
 
