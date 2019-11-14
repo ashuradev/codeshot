@@ -2,6 +2,8 @@
 
 App feito em ReactJS para tirar screenshots de trechos de códigos.
 
+Demo: https://codeshot.netlify.com
+
 Ferramentas utilizadas:
 
 - ReactJS
