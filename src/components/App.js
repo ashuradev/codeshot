@@ -1,6 +1,7 @@
 import React from 'react'
 import MonacoEditor from 'react-monaco-editor'
 import html2canvas from 'html2canvas'
+import draculaTheme from './../themes/dracula.json'
 
 import Header from './Header'
 
@@ -30,10 +31,15 @@ const App = () => {
       enabled: false
     },
     fontLigatures: true,
-    fontFamily: '"Fira Code", Consolas, "Courier New", monospace'
+    fontFamily: '"Fira Code", Consolas, "Courier New", monospace',
   })
 
-  const handleEditorDidMount = (editor, monaco) => {
+  const handleEditorDidMount = async (editor, monaco) => {
+    monaco.editor.defineTheme('dracula', draculaTheme)
+    monaco.editor.setTheme('dracula')
+
+    setEditor(editor)
+
     setOptions({
       ...options,
 
@@ -44,17 +50,13 @@ const App = () => {
 
       isEditorMounted: true
     })
-
-    setEditor(editor)
   }
 
   const save = () => editor && html2canvas(editor.getDomNode()).then(canvas => {
     const a = document.createElement('a')
 
-    const date = new Date().toLocaleString().replace(/ |\//g, '-')
-
     a.href = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream')
-    a.download = `go-revolution-${date}.jpg`
+    a.download = `go-revolution.jpg`
     a.click()
   })
 
