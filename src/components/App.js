@@ -5,26 +5,24 @@ import draculaTheme from './../themes/dracula.json'
 
 import Header from './Header'
 
-const defaultValue = `const compose = (...fns) => input => fns.reduce((acc, val) => val(acc), input)
+const defaultValue = `
+<?php
 
-compose(
-  name => \`$\{name} Yukizuki\`,
-  name => \`$\{name} Da\`,
-  name => \`$\{name} Silva\`,
-)('Ashura')`
+echo 'Oi, tudo bem?';
+`
 
 const App = () => {
   const [editor, setEditor] = React.useState()
 
   const [options, setOptions] = React.useState({
-    language: 'javascript',
+    language: 'php',
     languages: [],
     theme: 'vs-dark',
     isEditorMounted: false,
     fontSize: 18,
-    width: '100%',
-    height: 600,
-    lineNumbers: 'on',
+    width: 1079,
+    height: 1079,
+    lineNumbers: 'off',
     wordWrap: 'on',
     code: defaultValue,
     minimap: {
@@ -35,9 +33,6 @@ const App = () => {
   })
 
   const handleEditorDidMount = async (editor, monaco) => {
-    monaco.editor.defineTheme('dracula', draculaTheme)
-    monaco.editor.setTheme('dracula')
-
     setEditor(editor)
 
     setOptions({
