@@ -4,6 +4,8 @@ import html2canvas from 'html2canvas';
 
 import settings from '../config/editor.js';
 
+import { getTime } from '../utils/time';
+
 import '../styles/editor.css';
 
 import Logo from './Logo';
@@ -35,7 +37,7 @@ const App = () => {
       a.href = canvas
         .toDataURL('image/jpeg')
         .replace('image/jpeg', 'image/octet-stream');
-      a.download = '';
+      a.download = `${getTime()}.jpg`;
       a.click();
     });
 
