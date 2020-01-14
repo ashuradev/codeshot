@@ -1,39 +1,20 @@
-import React from 'react'
-import MonacoEditor from 'react-monaco-editor'
-import html2canvas from 'html2canvas'
-import draculaTheme from './../themes/dracula.json'
+import React from 'react';
+import MonacoEditor from 'react-monaco-editor';
+import html2canvas from 'html2canvas';
 
-import Header from './Header'
+import settings from '../config/editor.js';
 
-const defaultValue = `
-<?php
+import '../styles/editor.css';
 
-echo 'Oi, tudo bem?';
-`
+import Logo from './Logo';
+import Controls from './Controls';
 
 const App = () => {
-  const [editor, setEditor] = React.useState()
+  const [editor, setEditor] = React.useState();
+  const [options, setOptions] = React.useState(settings);
 
-  const [options, setOptions] = React.useState({
-    language: 'php',
-    languages: [],
-    theme: 'vs-dark',
-    isEditorMounted: false,
-    fontSize: 18,
-    width: 1079,
-    height: 1079,
-    lineNumbers: 'off',
-    wordWrap: 'on',
-    code: defaultValue,
-    minimap: {
-      enabled: false
-    },
-    fontLigatures: true,
-    fontFamily: '"Fira Code", Consolas, "Courier New", monospace',
-  })
-
-  const handleEditorDidMount = async (editor, monaco) => {
-    setEditor(editor)
+  const onEditorDidMount = async (editor, monaco) => {
+    setEditor(editor);
 
     setOptions({
       ...options,
@@ -44,40 +25,43 @@ const App = () => {
       })),
 
       isEditorMounted: true
-    })
-  }
+    });
+  };
 
-  const save = () => editor && html2canvas(editor.getDomNode()).then(canvas => {
-    const a = document.createElement('a')
+  const save = () =>
+    html2canvas(editor.getDomNode()).then(canvas => {
+      const a = document.createElement('a');
 
-    a.href = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream')
-    a.download = `go-revolution.jpg`
-    a.click()
-  })
+      a.href = canvas
+        .toDataURL('image/jpeg')
+        .replace('image/jpeg', 'image/octet-stream');
+      a.download = '';
+      a.click();
+    });
 
-  const handleCodeChange = newValue => setOptions({
-    ...options,
+  const onChange = newValue =>
+    setOptions({
+      ...options,
 
-    code: newValue
-  })
+      code: newValue
+    });
 
   return (
-    <React.Fragment>
-      <Header 
-        setOptions={setOptions} 
-        options={options} 
-        save={save} />
-      <MonacoEditor 
+    <>
+      <Logo />
+      <Controls setOptions={setOptions} options={options} save={save} />
+      <MonacoEditor
         language={options.language}
         theme={options.theme}
         height={options.height}
         width={options.width}
         options={options}
-        editorDidMount={handleEditorDidMount} 
-        value={options.code} 
-        onChange={handleCodeChange} />
-    </React.Fragment>
-  )
-}
+        editorDidMount={onEditorDidMount}
+        value={options.code}
+        onChange={onChange}
+      />
+    </>
+  );
+};
 
-export default App
+export default App;
