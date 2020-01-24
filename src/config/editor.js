@@ -1,5 +1,4 @@
-const defaultValue = `
-# Titulo
+const defaultValue = `# Titulo
 
 Conteúdo do post...
 `;
@@ -7,7 +6,7 @@ Conteúdo do post...
 const settings = {
   language: 'markdown',
   languages: [],
-  theme: 'vs-light',
+  theme: 'vs-dark',
   isEditorMounted: false,
   fontSize: 25,
   width: 1080,
